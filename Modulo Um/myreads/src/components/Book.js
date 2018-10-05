@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { BookShelfChanger } from "../atoms/BookShelfChanger";
+import BookShelfChanger from "../atoms/BookShelfChanger";
 
 class Book extends Component {
   render() {
+    const { title, author, coverURL } = this.props;
     return (
       <div className="book">
         <div className="book-top">
@@ -17,8 +18,8 @@ class Book extends Component {
           />
           <BookShelfChanger />
         </div>
-        <div className="book-title">To Kill a Mockingbird</div>
-        <div className="book-authors">Harper Lee</div>
+        <div className="book-title">{title}</div>
+        <div className="book-authors">{author}</div>
       </div>
     );
   }
