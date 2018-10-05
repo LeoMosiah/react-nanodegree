@@ -1,26 +1,18 @@
 import React, { Component } from "react";
-import * as BooksAPI from "./utils/BooksAPI";
-import "./App.css";
-import BookShelf from "./wrappers/BookShelf";
-import OpenSearch from "./atoms/OpenSearch";
+import BookShelf from "./BookShelf";
+import OpenSearch from "../atoms/OpenSearch";
 
-class BooksApp extends React.Component {
-  state = {
-    showSearchPage: false
-  };
-
+class BooksList extends Component {
   render() {
     return (
-      <div className="app">
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
-          <div className="list-books-content">
-            <BookShelf title="Currently Reading" />
-            <BookShelf title="Want To Read" />
-            <BookShelf title="Read" />
-          </div>
+      <div className="list-books">
+        <div className="list-books-title">
+          <h1>MyReads</h1>
+        </div>
+        <div className="list-books-content">
+          <BookShelf title="Currently Reading" />
+          <BookShelf title="Want To Read" />
+          <BookShelf title="Read" />
         </div>
         <OpenSearch />
       </div>
@@ -28,4 +20,4 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp;
+export default BooksList;
