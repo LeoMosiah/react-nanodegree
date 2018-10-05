@@ -7,3 +7,5 @@ const OpenSearch = props => {
     </div>
   );
 };
+
+export default OpenSearch;
