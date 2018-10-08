@@ -16,7 +16,9 @@ class SearchBooks extends Component {
   };
   searchBook = query => {
     BooksAPI.search(query).then(books => {
-      books.map(book => this.state.books.push(book));
+      try {
+        books.map(book => this.state.books.push(book));
+      } catch {}
     });
   };
   render() {
@@ -37,6 +39,7 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
+          {this.searchBook(input)}
           <ol className="books-grid">
             {books.map(book => (
               <Book
