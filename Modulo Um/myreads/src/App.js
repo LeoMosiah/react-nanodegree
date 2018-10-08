@@ -1,23 +1,27 @@
-import React, { Component } from "react";
-import BookShelf from "./BookShelf";
-import OpenSearch from "../atoms/OpenSearch";
+import React from 'react'
+import './App.css'
+import BooksList from "./wrappers/BooksList";
+import {Route} from "react-router-dom";
+import SearchBooks from "./components/SearchBooks";
+import * as BooksAPI from "./utils/BooksAPI"
 
-class BooksList extends Component {
+class BooksApp extends React.Component {
+    state = {
+        books: []
+    };
+    componentDidMount() {
+        BooksAPI.getAll().then(books => {
+            this.setState(() => ({ books }));
+        });
+    }
   render() {
     return (
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
+        <div className="app">
+            < Route exact path="/" component={BooksList}/>
+            <Route path="/search" component={SearchBooks}/>
         </div>
-        <div className="list-books-content">
-          <BookShelf title="Currently Reading" />
-          <BookShelf title="Want To Read" />
-          <BookShelf title="Read" />
-        </div>
-        <OpenSearch />
-      </div>
     );
   }
 }
 
-export default BooksList;
+export default BooksApp;
