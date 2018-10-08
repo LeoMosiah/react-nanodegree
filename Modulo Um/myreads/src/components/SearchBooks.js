@@ -37,13 +37,12 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          {this.searchBook("Art")}
           <ol className="books-grid">
             {books.map(book => (
               <Book
                 key={book.id}
                 title={`${book.title}`}
-                author={book.authors.join(" ")}
+                author={book.authors}
                 coverURL={book.imageLinks.smallThumbnail}
               />
             ))}
