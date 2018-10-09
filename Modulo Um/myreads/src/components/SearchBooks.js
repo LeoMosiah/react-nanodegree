@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "../utils/BooksAPI";
 import Book from "./Book";
 
+const isEmptyString = string => string === "";
+
 class SearchBooks extends Component {
   state = {
     input: "",
@@ -15,11 +17,15 @@ class SearchBooks extends Component {
     }));
   };
   searchBook = query => {
-    BooksAPI.search(query).then(books => {
-      try {
-        books.map(book => this.state.books.push(book));
-      } catch {}
-    });
+    if (!isEmptyString(query)){
+        BooksAPI.search(query).then(books => {
+            try {
+              this.setState((currentState) => ({
+                  books: (books.map(book => book))
+              }))
+            } catch (err){ console.log(err.message)}
+        });
+    } else {return query}
   };
   render() {
     const { input, books } = this.state;
