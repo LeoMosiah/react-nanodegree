@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import BookShelfChanger from "../atoms/BookShelfChanger";
 
 class Book extends Component {
+  state = {
+    shelf: ""
+  };
   render() {
     const { title, author, coverURL } = this.props;
     return (
@@ -12,11 +15,10 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage:
-                `url(${coverURL})`
+              backgroundImage: `url(${coverURL})`
             }}
           />
-          <BookShelfChanger />
+          <BookShelfChanger id={"key"} />
         </div>
         <div className="book-title">{title}</div>
         <div className="book-authors">{author}</div>
