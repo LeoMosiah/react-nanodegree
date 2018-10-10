@@ -21,7 +21,8 @@ class BookShelf extends Component {
               .map(book => (
                 <Book
                   key={book.id}
-                  title={`${book.title}`}
+                  id={book.id}
+                  title={book.title}
                   author={book.authors}
                   coverURL={book.imageLinks.smallThumbnail}
                 />
