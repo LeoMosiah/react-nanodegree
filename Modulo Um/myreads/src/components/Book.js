@@ -6,7 +6,7 @@ class Book extends Component {
     shelf: ""
   };
   render() {
-    const { title, author, coverURL } = this.props;
+    const { title, author, coverURL, id } = this.props;
     return (
       <div className="book">
         <div className="book-top">
@@ -18,7 +18,7 @@ class Book extends Component {
               backgroundImage: `url(${coverURL})`
             }}
           />
-          <BookShelfChanger id={"key"} />
+          <BookShelfChanger bookID={id} />
         </div>
         <div className="book-title">{title}</div>
         <div className="book-authors">{author}</div>
