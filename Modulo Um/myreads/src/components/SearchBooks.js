@@ -3,17 +3,31 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "../utils/BooksAPI";
 import Book from "./Book";
 
+async function name(params) {}
+
+const isEmptyString = string => string === "";
 class SearchBooks extends Component {
   state = {
-    books: [],
-    shelf: "Search"
+    books: []
   };
   handleSearch = query => {
-    BooksAPI.search(query).then(booksPromise => {
+    if (!isEmptyString(query)) {
+      BooksAPI.search(query)
+        .then(booksPromise => {
+          this.setState(() => ({
+            books: booksPromise
+          }));
+        })
+        .catch(error => {
+          this.setState(() => ({
+            books: error
+          }));
+        });
+    } else {
       this.setState(() => ({
-        books: booksPromise
+        books: []
       }));
-    });
+    }
   };
   render() {
     const { books } = this.state;
@@ -33,15 +47,16 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {books.map(book => (
-              <Book
-                key={book.id}
-                id={book.id}
-                title={book.title}
-                author={book.authors}
-                coverURL={book.imageLinks.smallThumbnail}
-              />
-            ))}
+            {books.error !== "empty query" &&
+              books.map(book => (
+                <Book
+                  key={book.id}
+                  id={book.id}
+                  title={book.title}
+                  author={book.authors}
+                  coverURL={book.imageLinks.smallThumbnail}
+                />
+              ))}
           </ol>
         </div>
       </div>
