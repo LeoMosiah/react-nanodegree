@@ -3,32 +3,28 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "../utils/BooksAPI";
 import Book from "./Book";
 
-async function name(params) {}
-
 const isEmptyString = string => string === "";
 class SearchBooks extends Component {
   state = {
     books: []
   };
-  handleSearch = query => {
+  async handleSearch(query) {
     if (!isEmptyString(query)) {
-      BooksAPI.search(query)
-        .then(booksPromise => {
-          this.setState(() => ({
-            books: booksPromise
-          }));
-        })
-        .catch(error => {
-          this.setState(() => ({
-            books: error
-          }));
+      try {
+        this.setState({
+          books: await BooksAPI.search(query)
         });
+      } catch (e) {
+        this.setState({
+          books: e
+        });
+      }
     } else {
-      this.setState(() => ({
+      this.setState({
         books: []
-      }));
+      });
     }
-  };
+  }
   render() {
     const { books } = this.state;
     return (
