@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import BookShelf from "./BookShelf";
-import OpenSearch from "../atoms/OpenSearch";
+import OpenSearch from "../components/OpenSearch";
+import * as BooksAPI from "../utils/BooksAPI";
 
 class BooksList extends Component {
+  state = {
+    books: []
+  };
+  async componentDidMount() {
+    this.setState({
+      books: await BooksAPI.getAll()
+    });
+  }
   render() {
-    const { books } = this.props;
+    const { books } = this.state;
     return (
       <div className="list-books">
         <div className="list-books-title">

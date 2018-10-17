@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import * as BooksAPI from "../utils/BooksAPI";
 
 class BookShelfChanger extends Component {
-  state = {
-    shelf: []
-  };
-  handleChange = (bookId, shelf) =>
-    shelf !== "none" ? BooksAPI.update({ id: bookId }, shelf) : null;
+  handleChange = (bookId, shelf) =>{
+    if(shelf !== "none"){
+      BooksAPI.update({ id: bookId }, shelf).then(res => console.log(res))
+    }
+  }
   render() {
-    const { bookID } = this.props;
+    const { bookID,shelf } = this.props;
     return (
       <div className="book-shelf-changer">
         <select
-          defaultValue="move"
+          defaultValue={shelf}
           onChange={event => this.handleChange(bookID, event.target.value)}
         >
           <option value="move" disabled>

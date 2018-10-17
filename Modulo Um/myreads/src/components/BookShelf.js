@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import Book from "../components/Book";
+import Book from "./Book";
+import _ from "lodash";
 
 class BookShelf extends Component {
-  byShelf = book => {};
-  camelize = str => {
-    return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
-      if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
-      return index == 0 ? match.toLowerCase() : match.toUpperCase();
-    });
-  };
   render() {
     const { title, books } = this.props;
     return (
@@ -17,14 +11,15 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {books
-              .filter(book => book.shelf === this.camelize(title))
+              .filter(book => book.shelf === _.camelCase(title))
               .map(book => (
                 <Book
                   key={book.id}
                   id={book.id}
                   title={book.title}
                   author={book.authors}
-                  coverURL={book.imageLinks.smallThumbnail}
+                  coverURL={book.imageLinks.thumbnail}
+                  shelf={book.shelf}
                 />
               ))}
           </ol>
