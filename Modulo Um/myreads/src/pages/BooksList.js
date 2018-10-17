@@ -13,20 +13,18 @@ class BooksList extends Component {
     });
   }
   handleChange = (bookId, shelf) => {
-    if (shelf !== "none") {
-      BooksAPI.update({ id: bookId }, shelf).then(() => {
-        this.setState(prevState => ({
-          books: prevState.books.map(book => {
-            if (book.id === bookId) {
-              book.shelf = shelf;
-              return book;
-            } else {
-              return book;
-            }
-          })
-        }));
-      });
-    }
+    BooksAPI.update({ id: bookId }, shelf).then(() => {
+      this.setState(prevState => ({
+        books: prevState.books.map(book => {
+          if (book.id === bookId) {
+            book.shelf = shelf;
+            return book;
+          } else {
+            return book;
+          }
+        })
+      }));
+    });
   };
   render() {
     const { books } = this.state;
