@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../utils/BooksAPI";
 import Book from "../components/Book";
+import { DebounceInput } from "react-debounce-input";
 
 const isEmptyString = string => string === "";
 class SearchBooks extends Component {
@@ -34,7 +35,8 @@ class SearchBooks extends Component {
             Close
           </Link>
           <div className="search-books-input-wrapper">
-            <input
+            <DebounceInput
+              minLength={2}
               type="text"
               placeholder="Search by title or author"
               onChange={event => this.handleSearch(event.target.value)}
