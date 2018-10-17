@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Book from "./Book";
+import Book from "../components/Book";
 import _ from "lodash";
 
 class BookShelf extends Component {
   render() {
-    const { title, books } = this.props;
+    const { title, books, handleChange } = this.props;
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{title}</h2>
@@ -19,6 +19,7 @@ class BookShelf extends Component {
                   title={book.title}
                   author={book.authors}
                   coverURL={book.imageLinks.thumbnail}
+                  handleChange={handleChange}
                   shelf={book.shelf}
                 />
               ))}
