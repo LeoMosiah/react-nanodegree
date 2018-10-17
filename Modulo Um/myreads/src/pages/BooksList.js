@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BookShelf from "./BookShelf";
+import BookShelf from "../components/BookShelf";
 import OpenSearch from "../components/OpenSearch";
 import * as BooksAPI from "../utils/BooksAPI";
 
