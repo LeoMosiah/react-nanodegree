@@ -1,5 +1,5 @@
 import React from "react";
-import BookShelfChanger from "./BookShelfChanger";
+import BookShelfChanger from "./BooShelfChanger";
 
 function Book(props) {
   const { title, author, coverURL, id, shelf } = props;
