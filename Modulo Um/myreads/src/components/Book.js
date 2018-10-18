@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 
 class Book extends Component {
-  state = {
-    shelf: ""
-  };
   render() {
     const { title, author, coverURL, id, handleChange, shelf } = this.props;
     return (
@@ -33,23 +30,19 @@ class Book extends Component {
 class BookShelfChanger extends Component {
   render() {
     const { bookID, handleChange, shelf } = this.props;
-    const bookHasShelf = shelf => (shelf !== undefined ? shelf : "move");
-    return (
-      <div className="book-shelf-changer">
-        <select
-          defaultValue={bookHasShelf(shelf)}
-          onChange={event => handleChange(bookID, event.target.value)}
-        >
-          <option value="move" disabled>
-            Move to...
-          </option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
-        </select>
-      </div>
-    );
+    const bookHasShelf = shelf => (shelf !== undefined ? shelf : "none");
+      return <div className="book-shelf-changer">
+          <select
+              defaultValue={bookHasShelf(shelf)}
+              onChange={event => handleChange(bookID, event.target.value)}
+          >
+              <option value="move" disabled label="Move to..."/>
+              <option value="currentlyReading" label="Currently Reading"/>
+              <option value="wantToRead" label="Want to Read"/>
+              <option value="read" label="Read"/>
+              <option value="none" label="None"/>
+          </select>
+      </div>;
   }
 }
 

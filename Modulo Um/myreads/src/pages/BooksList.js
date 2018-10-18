@@ -1,33 +1,11 @@
 import React, { Component } from "react";
 import BookShelf from "../components/BookShelf";
 import { Link } from "react-router-dom";
-import * as BooksAPI from "../utils/BooksAPI";
+
 
 class BooksList extends Component {
-  state = {
-    books: []
-  };
-  async componentDidMount() {
-    this.setState({
-      books: await BooksAPI.getAll()
-    });
-  }
-  handleChange = (bookId, shelf) => {
-    BooksAPI.update({ id: bookId }, shelf).then(() => {
-      this.setState(prevState => ({
-        books: prevState.books.map(book => {
-          if (book.id === bookId) {
-            book.shelf = shelf;
-            return book;
-          } else {
-            return book;
-          }
-        })
-      }));
-    });
-  };
   render() {
-    const { books } = this.state;
+    const { books,handleChange } = this.props;
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -37,17 +15,17 @@ class BooksList extends Component {
           <BookShelf
             title="Currently Reading"
             books={books}
-            handleChange={this.handleChange}
+            handleChange={handleChange}
           />
           <BookShelf
             title="Want To Read"
             books={books}
-            handleChange={this.handleChange}
+            handleChange={handleChange}
           />
           <BookShelf
             title="Read"
             books={books}
-            handleChange={this.handleChange}
+            handleChange={handleChange}
           />
         </div>
         <OpenSearch />

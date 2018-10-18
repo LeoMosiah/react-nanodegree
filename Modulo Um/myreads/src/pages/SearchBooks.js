@@ -7,27 +7,28 @@ import { DebounceInput } from "react-debounce-input";
 const isEmptyString = string => string === "";
 class SearchBooks extends Component {
   state = {
-    books: []
+    searchBooks: []
   };
   async handleSearch(query) {
     if (!isEmptyString(query)) {
       try {
         this.setState({
-          books: await BooksAPI.search(query)
+            searchBooks: await BooksAPI.search(query)
         });
       } catch (e) {
         this.setState({
-          books: e
+            searchBooks: e
         });
       }
     } else {
       this.setState({
-        books: []
+          searchBooks: []
       });
     }
   }
   render() {
-    const { books } = this.state;
+    const { searchBooks } = this.state;
+    const {handleChange} = this.props
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -45,14 +46,15 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {books.error !== "empty query" &&
-              books.map(book => (
+            {searchBooks.error !== "empty query" &&
+            searchBooks.map(book => (
                 <Book
                   key={book.id}
                   id={book.id}
                   title={book.title}
                   author={book.authors}
                   coverURL={book.imageLinks.smallThumbnail}
+                  handleChange={handleChange}
                 />
               ))}
           </ol>
