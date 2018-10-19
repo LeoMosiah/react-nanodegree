@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import BookShelf from "../components/BookShelf";
 import { Link } from "react-router-dom";
-import Header from "../components/Header"
+import Header from "../components/Header";
 
 class BooksList extends Component {
   render() {
-    const { books,handleChange } = this.props;
+    const { books, handleChange } = this.props;
     return (
       <div className="list-books">
-            <Header title="My Reads"/>
+        <Header title="My Reads" />
         <div className="list-books-content">
           <BookShelf
-            title="Currently Reading"
-            books={books}
+            shelfTitle="Currently Reading"
+            shelfBooks={books}
             handleChange={handleChange}
           />
           <BookShelf
-            title="Want To Read"
-            books={books}
+            shelfTitle="Want To Read"
+            shelfBooks={books}
             handleChange={handleChange}
           />
           <BookShelf
-            title="Read"
-            books={books}
+            shelfTitle="Read"
+            shelfBooks={books}
             handleChange={handleChange}
           />
         </div>
