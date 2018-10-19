@@ -28,7 +28,7 @@ class SearchBooks extends Component {
   }
   render() {
     const { searchBooks } = this.state;
-    const {handleChange} = this.props
+    const {handleChange} = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -37,7 +37,7 @@ class SearchBooks extends Component {
           </Link>
           <div className="search-books-input-wrapper">
             <DebounceInput
-              minLength={2}
+              minLength={3}
               type="text"
               placeholder="Search by title or author"
               onChange={event => this.handleSearch(event.target.value)}

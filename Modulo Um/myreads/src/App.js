@@ -14,31 +14,17 @@ class BooksApp extends React.Component {
             books: await BooksAPI.getAll()
         });
     }
-    componentDidUpdate(prevProps,prevState){
-        if(prevState.books !== this.state.books){
+    handleChange = async (bookId, shelf) => {
+        BooksAPI.update({ id: bookId }, shelf);
             this.setState({
-                books:this.state.books
-            })
-        }
-    }
-    handleChange = (bookId, shelf) => {
-        BooksAPI.update({ id: bookId }, shelf).then(() => {
-            this.setState(prevState => ({
-                books: prevState.books.map(book => {
-                    if (book.id === bookId) {
-                        book.shelf = shelf;
-                        return book;
-                    } else {
-                        return book;
-                    }
-                })
-            }));
-        });
+                books: this.state.books.filter(book => book.id !== bookId).concat( await BooksAPI.get(bookId))
+            });
     };
   render() {
-      const {books}=this.state
+      const {books}=this.state;
     return (
       <div className="app">
+          {console.log(books)}
           <Route exact path="/" render={()=>(
               <BooksList books={books} handleChange={this.handleChange} />
           )} />
