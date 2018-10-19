@@ -13,22 +13,22 @@ class SearchBooks extends Component {
     if (!isEmptyString(query)) {
       try {
         this.setState({
-            searchBooks: await BooksAPI.search(query)
+          searchBooks: await BooksAPI.search(query)
         });
       } catch (e) {
         this.setState({
-            searchBooks: e
+          searchBooks: e
         });
       }
     } else {
       this.setState({
-          searchBooks: []
+        searchBooks: []
       });
     }
   }
   render() {
     const { searchBooks } = this.state;
-    const {handleChange} = this.props;
+    const { handleChange } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -47,15 +47,8 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {searchBooks.error !== "empty query" &&
-            searchBooks.map(book => (
-                <Book
-                  key={book.id}
-                  id={book.id}
-                  title={book.title}
-                  author={book.authors}
-                  coverURL={book.imageLinks.smallThumbnail}
-                  handleChange={handleChange}
-                />
+              searchBooks.map(book => (
+                <Book key={book.id} book={book} handleChange={handleChange} />
               ))}
           </ol>
         </div>
