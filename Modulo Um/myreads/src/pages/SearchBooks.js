@@ -28,7 +28,7 @@ class SearchBooks extends Component {
   }
   render() {
     const { searchBooks } = this.state;
-    const { handleChange } = this.props;
+    const { handleChange, booksOnShelf } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -47,9 +47,23 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             {searchBooks.error !== "empty query" &&
-              searchBooks.map(book => (
-                <Book key={book.id} book={book} handleChange={handleChange} />
-              ))}
+              searchBooks
+                .filter(
+                  searchBook =>
+                    !booksOnShelf.find(
+                      bookOnShelf => searchBook.id === bookOnShelf.id
+                    )
+                )
+                .concat(
+                  booksOnShelf.filter(bookOnShelf =>
+                    searchBooks.find(
+                      searchBook => bookOnShelf.id === searchBook.id
+                    )
+                  )
+                )
+                .map(book => (
+                  <Book key={book.id} book={book} handleChange={handleChange} />
+                ))}
           </ol>
         </div>
       </div>
