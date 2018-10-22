@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { SelectMenu, Button } from "evergreen-ui";
-import _ from "lodash";
 
 class Book extends Component {
   render() {
@@ -28,27 +27,24 @@ class Book extends Component {
 class BookShelfChanger extends Component {
   render() {
     const { book, handleChange } = this.props;
-    const bookHasShelf = shelf =>
-      shelf !== undefined ? _.startCase(shelf) : "None";
+    const bookHasShelf = shelf => (shelf !== undefined ? shelf : "none");
     return (
       <div className="book-shelf-changer">
         <SelectMenu
           hasFilter={false}
-          hasTitle={false}
-          height={170}
-          width={150}
-          title="Select name"
+          height={180}
+          width={160}
+          title="Move to ..."
           options={[
-            "Move to ...",
-            "Currently Reading",
-            "Want To Read",
-            "Read",
-            "None"
-          ].map(label => ({ label, value: label }))}
+            { label: "Currently Reading", value: "currentlyReading" },
+            { label: "Want to Read", value: "wantToRead" },
+            { label: "Read", value: "read" },
+            { label: "None", value: "none" }
+          ]}
           selected={bookHasShelf(book.shelf)}
-          onSelect={item => handleChange(book, _.camelCase(item.value))}
+          onSelect={item => handleChange(book, item.value)}
         >
-          <Button className="hidden" />
+          <Button style={{ opacity: 0 }} />
         </SelectMenu>
       </div>
     );
