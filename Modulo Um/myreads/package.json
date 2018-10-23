@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.2.2",
+    "lodash": "latest",
     "evergreen-ui": "^4.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
@@ -26,8 +26,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "lodash": "latest"
-  }
+  ]
 }

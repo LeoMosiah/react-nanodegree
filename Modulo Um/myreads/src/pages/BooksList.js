@@ -1,35 +1,34 @@
-import React, { Component } from "react";
+import React from "react";
 import BookShelf from "../components/BookShelf";
 import { Link } from "react-router-dom";
-import Header from "../components/Header";
 
-class BooksList extends Component {
-  render() {
-    const { books, handleChange } = this.props;
-    return (
-      <div className="list-books">
-        <Header title="My Reads" />
-        <div className="list-books-content">
-          <BookShelf
-            shelfTitle="Currently Reading"
-            shelfBooks={books}
-            handleChange={handleChange}
-          />
-          <BookShelf
-            shelfTitle="Want To Read"
-            shelfBooks={books}
-            handleChange={handleChange}
-          />
-          <BookShelf
-            shelfTitle="Read"
-            shelfBooks={books}
-            handleChange={handleChange}
-          />
-        </div>
-        <OpenSearch />
+function BooksList(props) {
+  const { books, handleChange } = props;
+  return (
+    <div className="list-books">
+      <div className="list-books-title">
+        <h1>MyReads</h1>
       </div>
-    );
-  }
+      <div className="list-books-content">
+        <BookShelf
+          shelfTitle="Currently Reading"
+          shelfBooks={books}
+          handleChange={handleChange}
+        />
+        <BookShelf
+          shelfTitle="Want To Read"
+          shelfBooks={books}
+          handleChange={handleChange}
+        />
+        <BookShelf
+          shelfTitle="Read"
+          shelfBooks={books}
+          handleChange={handleChange}
+        />
+      </div>
+      <OpenSearch />
+    </div>
+  );
 }
 
 const OpenSearch = () => {
