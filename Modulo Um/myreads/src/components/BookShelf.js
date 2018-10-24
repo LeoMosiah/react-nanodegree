@@ -10,7 +10,11 @@ function collect(connect, monitor) {
     book: monitor.getItem()
   };
 }
-
+const bookShelfTarget = {
+  drop(props, monitor, component) {
+    return { title: props.shelfTitle };
+  }
+};
 function BookShelf(props) {
   const {
     shelfTitle,
@@ -42,4 +46,4 @@ function BookShelf(props) {
   );
 }
 
-export default DropTarget("book", {}, collect)(BookShelf);
+export default DropTarget("book", bookShelfTarget, collect)(BookShelf);
