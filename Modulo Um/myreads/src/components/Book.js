@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, SelectMenu } from "evergreen-ui";
 import { DragSource } from "react-dnd";
+import _ from "lodash";
 
 const bookSource = {
   beginDrag(props) {
@@ -11,7 +12,10 @@ const bookSource = {
     if (!monitor.didDrop()) {
       return;
     }
-    return props.handleDrop(props.book.id);
+    return props.handleDrop(
+      props.book,
+      _.camelCase(monitor.getDropResult().title)
+    );
   }
 };
 
