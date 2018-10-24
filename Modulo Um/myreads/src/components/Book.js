@@ -5,7 +5,6 @@ import _ from "lodash";
 
 const bookSource = {
   beginDrag(props) {
-    console.log("begin drag");
     return props.book;
   },
   endDrag(props, monitor, component) {
