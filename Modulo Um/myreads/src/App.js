@@ -25,9 +25,6 @@ class BooksApp extends React.Component {
         .concat(_.set(bookHandle, "shelf", bookShelf))
     });
   };
-  deleteItem = id => {
-    console.log(`deleting id: ${id}`);
-  };
   render() {
     const { books } = this.state;
     return (
@@ -39,7 +36,7 @@ class BooksApp extends React.Component {
             <BooksList
               books={books}
               handleChange={this.handleChange}
-              handleDrop={id => this.deleteItem(id)}
+              handleDrop={(book, shelf) => this.handleChange(book, shelf)}
             />
           )}
         />
