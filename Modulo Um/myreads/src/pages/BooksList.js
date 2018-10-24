@@ -3,7 +3,7 @@ import BookShelf from "../components/BookShelf";
 import { Link } from "react-router-dom";
 
 function BooksList(props) {
-  const { books, handleChange } = props;
+  const { books, handleChange, handleDrop } = props;
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -14,16 +14,19 @@ function BooksList(props) {
           shelfTitle="Currently Reading"
           shelfBooks={books}
           handleChange={handleChange}
+          handleDrop={handleDrop}
         />
         <BookShelf
           shelfTitle="Want To Read"
           shelfBooks={books}
           handleChange={handleChange}
+          handleDrop={handleDrop}
         />
         <BookShelf
           shelfTitle="Read"
           shelfBooks={books}
           handleChange={handleChange}
+          handleDrop={handleDrop}
         />
       </div>
       <OpenSearch />

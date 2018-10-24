@@ -5,6 +5,8 @@ import BooksList from "./pages/BooksList";
 import SearchBooks from "./pages/SearchBooks";
 import * as BooksAPI from "./utils/BooksAPI";
 import _ from "lodash";
+import HTML5Backend from "react-dnd-html5-backend";
+import { DragDropContext } from "react-dnd";
 
 class BooksApp extends React.Component {
   state = {
@@ -23,6 +25,9 @@ class BooksApp extends React.Component {
         .concat(_.set(bookHandle, "shelf", bookShelf))
     });
   };
+  deleteItem = id => {
+    console.log(`deleting id: ${id}`);
+  };
   render() {
     const { books } = this.state;
     return (
@@ -31,7 +36,11 @@ class BooksApp extends React.Component {
           exact
           path="/"
           render={() => (
-            <BooksList books={books} handleChange={this.handleChange} />
+            <BooksList
+              books={books}
+              handleChange={this.handleChange}
+              handleDrop={id => this.deleteItem(id)}
+            />
           )}
         />
         <Route
@@ -48,4 +57,4 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp;
+export default DragDropContext(HTML5Backend)(BooksApp);

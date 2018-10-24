@@ -1,12 +1,35 @@
 import React from "react";
 import { Button, SelectMenu } from "evergreen-ui";
+import { DragSource } from "react-dnd";
+
+const bookSource = {
+  beginDrag(props) {
+    console.log("begin drag");
+    return props.book;
+  },
+  endDrag(props, monitor, component) {
+    if (!monitor.didDrop()) {
+      return;
+    }
+    return props.handleDrop(props.book.id);
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
+    isDragging: monitor.isDragging()
+  };
+}
 
 function Book(props) {
-  const { book, handleChange } = props;
+  const { book, handleChange, isDragging, connectDragSource } = props;
   const bookHasImageLink = book =>
     book.imageLinks !== undefined ? book.imageLinks.thumbnail : null;
-  return (
-    <div className="book">
+  const opacity = isDragging ? 0 : 1;
+  return connectDragSource(
+    <div className="book" style={{ opacity }}>
       <div className="book-top">
         <div
           className="book-cover"
@@ -49,4 +72,4 @@ function BookShelfChanger(props) {
   );
 }
 
-export default Book;
+export default DragSource("book", bookSource, collect)(Book);
