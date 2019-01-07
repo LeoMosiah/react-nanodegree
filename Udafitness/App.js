@@ -8,12 +8,11 @@ import reducer from './reducers'
 export default class App extends Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
-        <View>
-          <AddEntry />
-        </View>
-      </Provider>
+        <Provider store={createStore(reducer)}>
+          <View>
+            <AddEntry />
+          </View>
+        </Provider>
     );
   }
 }
-

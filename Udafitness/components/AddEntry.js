@@ -23,7 +23,7 @@ class AddEntry extends Component {
         eat:0
     };
     increment = (metric) => {
-      const { max, step } = getMetricMetaInfo(metric)
+      const { max, step } = getMetricMetaInfo(metric);
 
       this.setState((state) => {
           const count = state[metric] + step;
@@ -63,7 +63,7 @@ class AddEntry extends Component {
           swim:0,
           sleep:0,
           eat:0
-      }))
+      }));
 
       submitEntry({ key , entry });
 
@@ -80,7 +80,7 @@ class AddEntry extends Component {
     render() {
         const metaInfo = getMetricMetaInfo();
 
-        if (this,props.alreadyLogged){
+        if (this.props.alreadyLogged){
             return (
               <View>
                   <Ionicons name='ios-happy-outline'
