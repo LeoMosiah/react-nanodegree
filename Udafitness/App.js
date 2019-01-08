@@ -10,6 +10,7 @@ import { createAppContainer, createBottomTabNavigator, createStackNavigator} fro
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { purple, white } from './utils/colors';
 import { Constants } from 'expo';
+import Live from './components/Live'
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
     return (
@@ -23,6 +24,7 @@ const Tabs = createBottomTabNavigator(
     {
         History: History,
         AddEntry: AddEntry,
+        Live: Live,
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -71,6 +73,13 @@ const MainNavigator = createStackNavigator({
       },
     }),
   },
+  Live: {
+    screen: Live,
+    navigationOptions: {
+      tabBarLabel: 'Live',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-speedometer' size={30} color={tintColor} />
+    }
+  }
 });
 
 export default class App extends Component {
