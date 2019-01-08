@@ -1,14 +1,15 @@
 import React, { Component} from 'react';
-import { View, Platform, StatusBar } from 'react-native'
+import { View, Platform, StatusBar } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
 import AddEntry from './components/AddEntry';
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import reducer from './reducers'
 import History from './components/History';
-import { createAppContainer, createBottomTabNavigator} from 'react-navigation';
-import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import EntryDetail from './components/EntryDetail'
+import { createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { purple, white } from './utils/colors';
-import { Constants } from 'expo'
+import { Constants } from 'expo';
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
     return (
@@ -27,8 +28,6 @@ const Tabs = createBottomTabNavigator(
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: ({ tintColor }) => {
                 const { routeName } = navigation.state;
-                // You can return any component that you like here! We usually use an
-                // icon component from react-native-vector-icons
                 return routeName === 'History' ? (
                     <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
                 ) : (
@@ -56,13 +55,31 @@ const Tabs = createBottomTabNavigator(
 
 const TabsContainer = createAppContainer(Tabs);
 
+const MainNavigator = createStackNavigator({
+  home: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  EntryDetail: {
+    screen: EntryDetail,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    }),
+  },
+});
+
 export default class App extends Component {
   render() {
     return (
         <Provider store={createStore(reducer)}>
           <View style={{flex: 1}}>
             <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-            <TabsContainer/>
+            <MainNavigator/>
           </View>
         </Provider>
     );

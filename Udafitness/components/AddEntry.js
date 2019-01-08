@@ -14,6 +14,7 @@ import { removeEntry, submitEntry } from '../utils/api';
 import { connect } from 'react-redux'
 import { addEntry } from '../actions'
 import { purple, white} from '../utils/colors';
+import { NavigationActions } from 'react-navigation'
 
 class AddEntry extends Component {
     state ={
@@ -66,6 +67,8 @@ class AddEntry extends Component {
           eat:0
       }));
 
+      this.toHome();
+
       submitEntry({ key , entry });
 
     };
@@ -76,8 +79,13 @@ class AddEntry extends Component {
           [key]: getDailyReminderValue()
         }));
 
+        this.toHome();
+
         removeEntry(key);
     };
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({key: 'AddEntry'}))
+  };
     render() {
         const metaInfo = getMetricMetaInfo();
 
