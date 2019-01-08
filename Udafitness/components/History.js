@@ -13,7 +13,7 @@ import MetricCard from './MetricCard';
 class History extends Component {
   state = {
     ready: false,
-  }
+  };
   componentDidMount() {
     const { dispatch } = this.props;
     const { ready } = this.state;
@@ -50,7 +50,7 @@ class History extends Component {
       }
     </View>
   );
-  renderEmptyDate(formattedDate){
+  static renderEmptyDate(formattedDate){
     return (
       <view style={styles.item}>
         <DateHeader date={formattedDate}/>
@@ -67,7 +67,7 @@ class History extends Component {
       <UdaciFitnessCalendar
         items={entries}
         renderItem={this.renderItem}
-        renderEmptyDate={this.renderEmptyDate}
+        renderEmptyDate={History.renderEmptyDate}
       />
     )
   }
